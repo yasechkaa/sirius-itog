@@ -1,0 +1,4 @@
+FROM alpine:latest
+COPY ./bin/user-service /user-service
+EXPOSE 80
+ENTRYPOINT ["/user-service"]

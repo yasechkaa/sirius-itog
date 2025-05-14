@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  loadbalancer:
+    image: nginx:latest
+    ports:
+      - "8082:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./frontend:/var/www/frontend
+
+  core-service:
+    image: alpine
+    command: /bin/core-service
+    volumes:
+      - ./bin/core-service:/bin/core-service
+    expose:
+      - "80"
+
+  user-service:
+    image: alpine
+    command: /bin/user-service
+    volumes:
+      - ./bin/user-service:/bin/user-service
+    expose:
+      - "80"
